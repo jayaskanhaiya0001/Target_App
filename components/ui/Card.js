@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginHorizontal: 24,
     borderRadius: 8,
-    backgroundColor: Colors.primary500,
+    backgroundColor: Colors.primary700,
     elevation: 4,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
