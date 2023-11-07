@@ -1,5 +1,12 @@
 import {useState, useEffect} from 'react';
-import {Alert, StyleSheet, Text, View, FlatList} from 'react-native';
+import {
+  Alert,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  useWindowDimensions,
+} from 'react-native';
 import Title from '../components/ui/Title';
 import {NumberContainer} from '../components/game/NumberContainer';
 import {PrimaryButton} from '../components/ui/PrimaryButton';
@@ -28,6 +35,7 @@ export const GameScreen = ({userNumber, onGameOver}) => {
   );
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const [guessRounds, setGuessRounds] = useState([initialGuess]);
+  const {width, height} = useWindowDimensions();
   useEffect(() => {
     if (currentGuess === userNumber) {
       onGameOver(guessRounds.length);
@@ -64,9 +72,8 @@ export const GameScreen = ({userNumber, onGameOver}) => {
     setGuessRounds(prevGuessRounds => [...prevGuessRounds, newRndNumber]);
   }
   const guessRoundListLength = guessRounds.length;
-  return (
-    <View style={styles.screen}>
-      <Title>Opponent's Guess</Title>
+  let content = (
+    <>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionText style={styles.instructionText}>
@@ -85,6 +92,12 @@ export const GameScreen = ({userNumber, onGameOver}) => {
           </View>
         </View>
       </Card>
+    </>
+  );
+  return (
+    <View style={styles.screen}>
+      <Title>Opponent's Guess</Title>
+      {content}
       <View style={styles.listContainer}>
         {/* {guessRounds.map(guessRound => (
           <Text key={guessRound}>{guessRound}</Text>
